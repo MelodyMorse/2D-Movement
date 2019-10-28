@@ -29,6 +29,8 @@ public class JumpArc : MonoBehaviour
     }
     private float _acceleration;
     private float _displacement;
+    private float _time;
+    float displacementY = 25;
 
     public bool InitialVelocityIsKnown;
     public bool FinalVelocityIsKnown;
