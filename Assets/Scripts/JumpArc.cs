@@ -5,14 +5,35 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class JumpArc : MonoBehaviour
 {
+    //public Texture btnTexture;
     LineRenderer _lineRenderer;
     public float arcHeight = 2;
     public float arcDistance = 3;
     public int numberPoints = 3;
+    public float InitialVelocity
+    {
+        get { return _initialVelocity; }
+        set
+        {
+            if (InitialVelocityIsKnown) _initialVelocity = value;
+        }
+    }
     private float _initialVelocity;
     private float _finalVelocity;
+    public float FinalVelocity
+    {
+        get { return _finalVelocity;  }
+        set {
+                if(FinalVelocityIsKnown) _finalVelocity = value;
+            }
+    }
     private float _acceleration;
-    private float _displacement; 
+    private float _displacement;
+
+    public bool InitialVelocityIsKnown;
+    public bool FinalVelocityIsKnown;
+    public bool accelerationIsKnown;
+    public bool displacementIsKnoun;
 
     private void Awake()
     {
@@ -42,6 +63,11 @@ public class JumpArc : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnDrawGizmos()
+    {
+      //  Handles.BeginGUI();
     }
 
     public static float CalculateInitialVelocity(float finalVelocity, float acceleration, float displacement)
