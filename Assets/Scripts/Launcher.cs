@@ -2,22 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(LineRenderer))]
 public class Launcher : MonoBehaviour
 {
     Rigidbody2D rb2D;
+    LineRenderer lineRenderer;
     public Transform target;
     public float h = 25;
     Vector3 targetPos;
     float grav;
+    float gAbsolute;
+    float angle;
+    float speed;
 
+    public int resolution = 10;
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         targetPos = target.position;
-        grav = Physics.gravity.y;
+        grav = Physics2D.gravity.y;
+        gAbsolute = Mathf.Abs(grav);
         rb2D.gravityScale = 0;
+
+        lineRenderer = GetComponent<LineRenderer>();
+        
     }
-    
+    private void Start()
+    {
+        //CalculateAngle();
+        CalculateArcArray();
+        RenderArc();
+        
+    }
+
 
 
     void Launch()
@@ -25,6 +42,7 @@ public class Launcher : MonoBehaviour
         rb2D.gravityScale = 1;
         rb2D.velocity = CalculateLaunchVelocity();
         Debug.Log("launch velocity: " + CalculateLaunchVelocity());
+        
     }
 
    Vector3 CalculateLaunchVelocity()
@@ -47,5 +65,48 @@ public class Launcher : MonoBehaviour
         {
             Launch();
         }
+    }
+
+    float CalculateAngle()
+    {
+        Vector3 initVelocity = CalculateLaunchVelocity();
+        float angle = Vector3.Angle(initVelocity, Vector3.right);
+
+        return angle * Mathf.Deg2Rad;
+    }
+
+    Vector3[] CalculateArcArray()
+    {
+        Vector3[] points = new Vector3[resolution + 1];
+        Vector3 v = CalculateLaunchVelocity();
+        float a = CalculateAngle(); 
+
+        speed = v.magnitude;
+        Debug.Log("magnitude: " + speed);
+        float maxDistance = (speed * speed * Mathf.Sin(2 * a)) / gAbsolute;
+        Debug.Log("max: " + maxDistance);
+        for (int i = 0; i <= resolution; i++)
+        {
+            float t = (float)i / (float)resolution;
+            points[i] = CalculateArcPoint(t, maxDistance);
+        }
+
+        return points;
+    }
+
+    Vector3 CalculateArcPoint(float t, float maxDistance)
+    {
+        Vector3 velociity = CalculateLaunchVelocity();
+       
+        float x = t * maxDistance;
+        float a = CalculateAngle();
+        float y = x * Mathf.Tan(a) - ((gAbsolute * x * x) / (2 * velociity.magnitude * velociity.magnitude * Mathf.Cos(a) * Mathf.Cos(a)));
+        return new Vector3(x, y);
+    }
+
+    void RenderArc()
+    {
+        lineRenderer.SetVertexCount(resolution + 1);
+        lineRenderer.SetPositions(CalculateArcArray());
     }
 }
