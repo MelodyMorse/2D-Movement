@@ -7,9 +7,9 @@ public class Launcher : MonoBehaviour
 {
     Rigidbody2D rb2D;
     LineRenderer lineRenderer;
-    public Transform target;
+    //public Transform target;
     public float h = 25;
-    Vector3 targetPos;
+    public Vector3 targetPos;
     float grav;
     float gAbsolute;
     float angle;
@@ -19,13 +19,13 @@ public class Launcher : MonoBehaviour
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        targetPos = target.position;
+        
         grav = Physics2D.gravity.y;
         gAbsolute = Mathf.Abs(grav);
-        rb2D.gravityScale = 0;
+        //rb2D.gravityScale = 0;
 
         lineRenderer = GetComponent<LineRenderer>();
-        
+        lineRenderer.sortingLayerName = "Line";
     }
     private void Start()
     {
@@ -34,8 +34,18 @@ public class Launcher : MonoBehaviour
         RenderArc();
         
     }
-
-
+    private void OnDrawGizmos()
+    {
+        Vector3[] points = CalculateArcArray();
+        Gizmos.color = Color.blue;
+        for (int i = 0; i < points.Length; i++)
+        {
+            if (i < points.Length - 1)
+            {
+                Gizmos.DrawLine(transform.position + points[i], transform.position + points[i + 1]);
+            }
+        }
+    }
 
     void Launch()
     {
@@ -47,7 +57,7 @@ public class Launcher : MonoBehaviour
 
    Vector3 CalculateLaunchVelocity()
     {
-        Vector3 position = rb2D.position;
+        Vector3 position = transform.position;
         float displacementY = targetPos.y - position.y;
         float displacementX = targetPos.x - position.x;
         Vector3 displacementXZ = new Vector3 (targetPos.x - position.x, 0, 0);
@@ -106,7 +116,8 @@ public class Launcher : MonoBehaviour
 
     void RenderArc()
     {
-        lineRenderer.SetVertexCount(resolution + 1);
+        lineRenderer.positionCount = resolution + 1;
         lineRenderer.SetPositions(CalculateArcArray());
     }
+    //initv = sqrt(2* grav * jumpHeight)
 }
