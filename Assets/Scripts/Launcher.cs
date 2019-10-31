@@ -19,7 +19,7 @@ public class Launcher : MonoBehaviour
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        
+        rb2D.gravityScale = 0;
         grav = Physics2D.gravity.y;
         gAbsolute = Mathf.Abs(grav);
         //rb2D.gravityScale = 0;
@@ -30,13 +30,13 @@ public class Launcher : MonoBehaviour
     private void Start()
     {
         //CalculateAngle();
-        CalculateArcArray();
-        RenderArc();
+        //CalculateArcArray();
+        //RenderArc();
         
     }
     private void OnDrawGizmos()
     {
-        Vector3[] points = CalculateArcArray();
+       /* Vector3[] points = CalculateArcArray();
         Gizmos.color = Color.blue;
         for (int i = 0; i < points.Length; i++)
         {
@@ -44,7 +44,7 @@ public class Launcher : MonoBehaviour
             {
                 Gizmos.DrawLine(transform.position + points[i], transform.position + points[i + 1]);
             }
-        }
+        }*/
     }
 
     void Launch()
@@ -66,6 +66,20 @@ public class Launcher : MonoBehaviour
         Vector3 velocityX = Vector3.right * (displacementX / (Mathf.Sqrt(-2 * h / grav) + Mathf.Sqrt(2 * (displacementY - h) / grav)));
 
         return velocityX + velocityY;
+    }
+
+    public static Vector3 CalculateInitialVelocity(Vector3 pos, Vector3 targ, float maxHeight, float gravity)
+    {
+        
+        float displacementY = targ.y - pos.y;
+        float displacementX = targ.x - pos.x;
+        Vector3 displacementXZ = new Vector3(targ.x - pos.x, 0, 0);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * maxHeight);
+        Vector3 velocityX = Vector3.right * (displacementX / (Mathf.Sqrt(-2 * maxHeight / gravity) + Mathf.Sqrt(2 * (displacementY - maxHeight) / gravity)));
+
+        return velocityX + velocityY;
+        
     }
 
     // Update is called once per frame

@@ -95,13 +95,15 @@ public class CharacterController2D : MonoBehaviour
 		// If the player should jump...
 		if (m_Grounded && jump)
 		{
+            Debug.Log("Jump");
+
             // Add a vertical force to the player.
-            float jumpInit = Mathf.Sqrt(2 * -Physics2D.gravity.y * jumpHeight);
-            Debug.Log("jump init: " + Mathf.Sqrt(2 * -Physics2D.gravity.y * jumpHeight));
+            Vector2 verticalJumpVelocity = Launcher.CalculateInitialVelocity(transform.position, transform.position + Vector3.up * jumpHeight, jumpHeight, Physics2D.gravity.y * m_Rigidbody2D.gravityScale);
+            
             m_Grounded = false;
-            //float deltaTime
-            m_Rigidbody2D.AddForce(new Vector2(0f, jumpInit), ForceMode2D.Impulse);
-            //m_Rigidbody2D.velocity += new Vector2(0, jumpInit);
+            
+            m_Rigidbody2D.AddForce(verticalJumpVelocity, ForceMode2D.Impulse);
+            
 
 		}
 	}
