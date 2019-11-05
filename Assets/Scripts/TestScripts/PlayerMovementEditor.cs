@@ -17,10 +17,10 @@ public class PlayerMovementEditor : Editor
 
     private void OnSceneGUI()
     {
-        Vector3 heightArrowOrigin = pm.transform.position + new Vector3(-1, -1);
-        Vector3 jumpHeightArrowEndPoint = heightArrowOrigin + new Vector3(0, pm.jumpHeight);
+       // Vector3 heightArrowOrigin = pm.transform.position + new Vector3(-1, -1);
+       // Vector3 jumpHeightArrowEndPoint = heightArrowOrigin + new Vector3(0, pm.jumpHeight);
            
-        Handles.DrawLine(heightArrowOrigin, jumpHeightArrowEndPoint);
+       // Handles.DrawLine(heightArrowOrigin, jumpHeightArrowEndPoint);
        
         //Handles.Label(controller2D.transform.position, "Hello World");
         //Handles.color = Color.blue;

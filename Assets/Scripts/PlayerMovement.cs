@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	public CharacterController2D controller;
 
-    public float jumpHeight = 4.0f;
-	public float runSpeed = 1f;
+    //public float jumpHeight = 4.0f;
+	//public float runSpeed = 1f;
     
 
 	float horizontalMove = 0f;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+		horizontalMove = Input.GetAxisRaw("Horizontal");
 
 		if (Input.GetButtonDown("Jump"))
 		{
