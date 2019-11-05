@@ -64,4 +64,18 @@ public class KinematicHelper
 
         return angle * Mathf.Deg2Rad;
     }
+
+    public static Vector3 CalculateInitialVelocity(Vector3 pos, Vector3 targ, float maxHeight, float gravity)
+    {
+
+        float displacementY = targ.y - pos.y;
+        float displacementX = targ.x - pos.x;
+        Vector3 displacementXZ = new Vector3(targ.x - pos.x, 0, 0);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * maxHeight);
+        Vector3 velocityX = Vector3.right * (displacementX / (Mathf.Sqrt(-2 * maxHeight / gravity) + Mathf.Sqrt(2 * (displacementY - maxHeight) / gravity)));
+
+        return velocityX + velocityY;
+
+    }
 }

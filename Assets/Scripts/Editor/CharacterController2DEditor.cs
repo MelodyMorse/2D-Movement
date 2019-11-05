@@ -39,7 +39,7 @@ public class CharacterController2DEditor : Editor
         Handles.DrawLine(runArrowOrigin, runArrowEndPoint);
         controller2D.runSpeed = Handles.ScaleValueHandle(controller2D.runSpeed, runArrowEndPoint, Quaternion.LookRotation(Vector3.right), 10, Handles.ArrowHandleCap, 0.1f);
         float scaledGravity = Physics2D.gravity.y * controller2D.gameObject.GetComponent<Rigidbody2D>().gravityScale;
-        Vector2 verticalJumpVelocity = Launcher.CalculateInitialVelocity(controller2D.transform.position, controller2D.transform.position + Vector3.up * controller2D.jumpHeight, controller2D.jumpHeight, scaledGravity);
+        Vector2 verticalJumpVelocity = KinematicHelper.CalculateInitialVelocity(controller2D.transform.position, controller2D.transform.position + Vector3.up * controller2D.jumpHeight, controller2D.jumpHeight, scaledGravity);
 
         Vector3[] arcPoints = KinematicHelper.CalculateArcArray(new Vector3(controller2D.runSpeed, verticalJumpVelocity.y), 10, scaledGravity );
 

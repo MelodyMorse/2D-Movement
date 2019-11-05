@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Launcher : MonoBehaviour
 {
-    Rigidbody2D rb2D;
+   /* Rigidbody2D rb2D;
     LineRenderer lineRenderer;
     //public Transform target;
     public float h = 25;
@@ -45,9 +45,9 @@ public class Launcher : MonoBehaviour
                 Gizmos.DrawLine(transform.position + points[i], transform.position + points[i + 1]);
             }
         }*/
-    }
+    //}
 
-    void Launch()
+    /*void Launch()
     {
         rb2D.gravityScale = 1;
         rb2D.velocity = CalculateLaunchVelocity();
@@ -133,5 +133,5 @@ public class Launcher : MonoBehaviour
         lineRenderer.positionCount = resolution + 1;
         lineRenderer.SetPositions(CalculateArcArray());
     }
-    //initv = sqrt(2* grav * jumpHeight)
+    //initv = sqrt(2* grav * jumpHeight) */
 }

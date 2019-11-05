@@ -97,7 +97,7 @@ public class CharacterController2D : MonoBehaviour
 		if (m_Grounded && jump)
         { 
             // Add a vertical force to the player.
-            Vector2 verticalJumpVelocity = Launcher.CalculateInitialVelocity(transform.position, transform.position + Vector3.up * jumpHeight, jumpHeight, Physics2D.gravity.y * m_Rigidbody2D.gravityScale);
+            Vector2 verticalJumpVelocity = KinematicHelper.CalculateInitialVelocity(transform.position, transform.position + Vector3.up * jumpHeight, jumpHeight, Physics2D.gravity.y * m_Rigidbody2D.gravityScale);
             
             m_Grounded = false;
             

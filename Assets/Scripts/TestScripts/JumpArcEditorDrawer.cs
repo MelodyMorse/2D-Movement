@@ -18,7 +18,7 @@ public class JumpArcEditorDrawer : Editor
         GUILayout.BeginArea(new Rect(120, 20, 200, 100));
         if(GUILayout.Button("Calculate Initial Velocity"))
         {
-            t.InitialVelocity = JumpArc.CalculateInitialVelocity(0, 0, 0);
+            //t.InitialVelocity = JumpArc.CalculateInitialVelocity(0, 0, 0);
         }
         GUILayout.EndArea();
         GUILayout.EndVertical();

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class JumpArc : MonoBehaviour
 {
-    //public Texture btnTexture;
+  /*  //public Texture btnTexture;
     LineRenderer _lineRenderer;
     public float arcHeight = 2;
     public float arcDistance = 3;
@@ -81,5 +81,5 @@ public class JumpArc : MonoBehaviour
         return initialVelocity;
     }
 
-
+    */
 }
