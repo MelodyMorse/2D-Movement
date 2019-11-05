@@ -51,12 +51,7 @@ public class KinematicHelper
         return new Vector3(x, y);
     }
 
-    void RenderArc()
-    {
-        //lineRenderer.positionCount = resolution + 1;
-        //lineRenderer.SetPositions(CalculateArcArray());
-    }
-
+    
     public static float CalculateAngle(Vector3 velocity)
     {
         
