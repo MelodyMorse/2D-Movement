@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[System.Serializable]
 public class CharacterController2D : MonoBehaviour
 {
     public float jumpHeight = 4;
@@ -75,7 +75,8 @@ public class CharacterController2D : MonoBehaviour
 			}
 
 			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move, m_Rigidbody2D.velocity.y);
+
+			Vector3 targetVelocity = new Vector2(move * runSpeed, m_Rigidbody2D.velocity.y);
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
 
@@ -94,17 +95,13 @@ public class CharacterController2D : MonoBehaviour
 		}
 		// If the player should jump...
 		if (m_Grounded && jump)
-		{
-            Debug.Log("Jump");
-
+        { 
             // Add a vertical force to the player.
             Vector2 verticalJumpVelocity = Launcher.CalculateInitialVelocity(transform.position, transform.position + Vector3.up * jumpHeight, jumpHeight, Physics2D.gravity.y * m_Rigidbody2D.gravityScale);
             
             m_Grounded = false;
             
             m_Rigidbody2D.AddForce(verticalJumpVelocity, ForceMode2D.Impulse);
-            
-
 		}
 	}
 
