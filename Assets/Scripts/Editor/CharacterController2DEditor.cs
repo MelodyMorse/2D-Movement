@@ -32,7 +32,7 @@ public class CharacterController2DEditor : Editor
         Vector3 runArrowEndPoint = runArrowOrigin + new Vector3(controller2D.runSpeed, 0);
 
         Vector3 jumpArcOrigin = runArrowOrigin;
-        Handles.color = Color.blue;
+        Handles.color = Color.white;
         Handles.DrawLine(heightArrowOrigin, jumpHeightArrowEndPoint);
         controller2D.jumpHeight = Handles.ScaleValueHandle(controller2D.jumpHeight, jumpHeightArrowEndPoint, Quaternion.LookRotation(Vector3.up), 10, Handles.ArrowHandleCap, 0.1f);
 
